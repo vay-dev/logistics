@@ -1,0 +1,56 @@
+// buttons.scss
+@use "./variables" as *;
+
+// Base button style
+@mixin button-base {
+  font-family: $font-primary;
+  font-weight: $font-semibold;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 6px;
+  font-size: $font-normal;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+// Button sizes
+@mixin button-size($size) {
+  @if $size == small {
+    padding: 8px 15px;
+  } @else if $size == medium {
+    padding: 0.6rem 1.2rem;
+  } @else if $size == large {
+    padding: 20px 40px;
+  }
+}
+
+// Filled variant (default color is simdarkblue)
+@mixin button-filled($color: $color-simdarkblue) {
+  background-color: $color;
+  color: #fff;
+
+  &:hover {
+    background-color: #fff;
+    color: $color;
+    border: 1px solid $color;
+  }
+}
+
+// Outline variant (default color is simdarkblue)
+@mixin button-outline($color: $color-simdarkblue) {
+  background-color: transparent;
+  color: $color;
+  border: 2px solid $color;
+
+  &:hover {
+    background-color: $color !important;
+    color: #fff;
+  }
+}

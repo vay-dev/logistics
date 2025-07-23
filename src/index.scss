@@ -1,0 +1,43 @@
+@use "./variables" as *;
+@use "sass:color";
+@use "functions" as *;
+@use "./buttons" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: $font-primary;
+  background-color: $color-light-bg;
+  color: contrast-color($color-light-bg);
+  transition: background 0.3s, color 0.3s;
+  // Dark mode overrides
+}
+
+body.dark-mode {
+  header {
+    background-color: $color-dark-bg;
+    color: contrast-color($color-dark-bg);
+
+    .nav-links .nav-link {
+      color: contrast-color($color-dark-bg);
+
+      &:hover {
+        color: $color-simorange;
+      }
+    }
+
+    .btn-filled {
+      @include button-filled(color.adjust($color-simblue, $lightness: 10%));
+    }
+
+    .btn-outline {
+      @include button-outline(color.adjust($color-simblue, $lightness: 10%));
+    }
+  }
+}

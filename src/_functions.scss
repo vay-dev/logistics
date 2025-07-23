@@ -1,0 +1,12 @@
+@use "sass:color";
+@use "sass:math";
+@use "./variables" as *;
+
+@function contrast-color($background) {
+  $r: color.channel($background, "red");
+  $g: color.channel($background, "green");
+  $b: color.channel($background, "blue");
+  $luminance: math.div((0.299 * $r + 0.587 * $g + 0.114 * $b), 255);
+
+  @return if($luminance > 0.5, $color-black, $color-white);
+}

@@ -1,0 +1,72 @@
+@use "../../buttons" as *;
+@use "../../variables" as *;
+@use "../../functions" as *;
+
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100px;
+  padding: 20px;
+  position: fixed;
+  width: 100% !important;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  gap: 3rem;
+  background-color: $color-light-bg;
+  color: contrast-color($color-light-bg);
+
+  h1 {
+    font-size: $font-big;
+    margin-bottom: 1rem;
+    color: $color-text2;
+    font-weight: $font-semibold;
+
+    span {
+      color: $color-simorange;
+      font-weight: $font-bold;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin-bottom: 1rem;
+
+    li {
+      font-size: $font-normal;
+
+      .nav-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $color-simorange;
+        }
+      }
+    }
+  }
+
+  .btn-con {
+    display: flex;
+    gap: 1rem;
+
+    .btn {
+      @include button-base;
+      @include button-size(large);
+    }
+
+    .btn-filled {
+      @extend .btn;
+      @include button-filled($color-simblue);
+    }
+
+    .btn-outline {
+      @extend .btn;
+      @include button-outline($color-simblue);
+    }
+  }
+}
