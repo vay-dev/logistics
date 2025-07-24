@@ -32,7 +32,7 @@ const GuestBar = () => {
           <Link to="/login" className="btn btn-outline">
             Login
           </Link>
-          <Link to="/register" className="btn btn-filled">
+          <Link to="/signup" className="btn btn-filled">
             Register
           </Link>
         </div>

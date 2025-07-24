@@ -6,6 +6,8 @@ import Home from "./guest/home";
 import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BackToTop from "./shared/back-to-top";
+import Signup from "./auth/signup";
+import Login from "./auth/login";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,6 +16,8 @@ createRoot(document.getElementById("root")).render(
       <BackToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
