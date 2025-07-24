@@ -39,3 +39,18 @@ $spacing-sm: 1rem;
 $spacing-md: 1.5rem;
 $spacing-lg: 2rem;
 $spacing-xl: 3rem;
+
+// BOX SHADOW
+$small-shadow: 0 0 10px rgba(black, 0.1);
+$medium-shadow: 0 4px 20px rgba(black, 0.15);
+$large-shadow: 0 8px 30px rgba(black, 0.2);
+
+@mixin flex-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin normal-flex {
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,32 @@
+@use "../../variables" as *;
+
+.icon-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  background: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $small-shadow;
+  z-index: auto;
+
+  // Outer shadow or soft background circle
+  &::before {
+    content: "";
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    inset: 0; // shorthand for top: 0; right: 0; bottom: 0; left: 0;
+    border-radius: 50%;
+    z-index: -1;
+    transform: translate(30px, -40px);
+    background: #f5f5f5;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.08); // subtle inner glow
+  }
+}
+
+i {
+  font-size: 1.5rem;
+}

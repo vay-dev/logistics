@@ -1,0 +1,403 @@
+@use "../../buttons" as *;
+@use "../../functions" as *;
+@use "../../variables" as *;
+@use "sass:color";
+
+.content-wrapper {
+  width: 100%;
+
+  .hero-section {
+    padding: 20px;
+
+    .row {
+      #first-content {
+        .content-container {
+          text-align: center;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .button-group {
+          display: flex;
+          gap: 10px;
+          margin-left: auto;
+          .btn {
+            @include button-base;
+            @include button-size(medium);
+          }
+
+          .filled {
+            @include button-filled($color-simblue);
+          }
+
+          .outline {
+            @include button-outline($color-simblue);
+          }
+        }
+      }
+
+      #second-content {
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.price-wrapper {
+  padding: $spacing-xl;
+  .price-checker-wrapper {
+    display: flex;
+    width: 100%;
+    padding: $spacing-lg !important;
+    gap: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    background-color: white;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      label {
+        font-weight: $font-bold;
+        margin-bottom: 0.25rem;
+        font-size: $font-normal;
+      }
+
+      .input-icon {
+        display: flex;
+        align-items: center;
+        border: 1px solid $color-stroke;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+
+        i {
+          color: $color-simdarkblue;
+          margin-right: 0.5rem;
+        }
+
+        input {
+          border: none;
+          outline: none;
+          width: 100%;
+          font-size: 0.95rem;
+          color: $color-text1;
+        }
+      }
+    }
+
+    .check-price-btn {
+      background-color: $color-simdarkblue;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: end;
+      margin-top: 1.5rem;
+
+      &:hover {
+        background-color: color.adjust(
+          $color: $color-simdarkblue,
+          $lightness: 5%
+        );
+      }
+    }
+  }
+}
+
+.services-container {
+  background-color: #f8fafb;
+  position: relative;
+  padding: $spacing-xl;
+  z-index: -1 !important;
+
+  .service-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100% !important;
+  }
+}
+
+.freight-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-block: $spacing-xl;
+
+  .freight-option {
+    flex: 1 1 280px;
+    max-width: 350px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: white;
+    box-shadow: $small-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .freight-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $medium-shadow;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .option-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.operations-mode-section {
+  padding: $spacing-xl;
+  margin-block: $spacing-xl;
+  background: linear-gradient(135deg, #f8fafb 0%, #e8f4f8 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Grid background pattern
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+
+  .operations-heading {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    position: relative;
+    z-index: 2;
+  }
+
+  .operations-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .operation-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 6rem;
+    min-height: 400px;
+    position: relative;
+
+    &.reverse {
+      grid-template-columns: 1fr 1fr;
+
+      .operation-content {
+        order: 2;
+      }
+
+      .operation-image-container {
+        order: 1;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .operation-content {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 3;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(
+        90deg,
+        $color-simblue 0%,
+        $color-simdarkblue 100%
+      );
+      border-radius: 20px 20px 0 0;
+    }
+  }
+
+  .operation-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(
+      135deg,
+      $color-simblue 0%,
+      $color-simdarkblue 100%
+    );
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 16px rgba($color-simblue, 0.3);
+  }
+
+  .operation-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $color-simdarkblue;
+    margin-bottom: 1rem;
+  }
+
+  .operation-description {
+    color: $color-text1;
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  .operation-image-container {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .operation-image {
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+
+    &:hover {
+      transform: scale(1.05) !important;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .image-bg-decoration {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(
+      135deg,
+      rgba($color-simblue, 0.1) 0%,
+      rgba($color-simdarkblue, 0.1) 100%
+    );
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    .operation-item {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      min-height: auto;
+
+      &.reverse {
+        .operation-content {
+          order: 1;
+        }
+
+        .operation-image-container {
+          order: 2;
+        }
+      }
+    }
+
+    .operation-image-container {
+      height: 250px;
+    }
+
+    .operation-content {
+      padding: 1.5rem;
+    }
+
+    .operation-title {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// Additional utility classes for more positioning control
+.operations-mode-section {
+  .position-absolute {
+    position: absolute !important;
+  }
+
+  .position-relative {
+    position: relative !important;
+  }
+
+  .custom-transform {
+    transition: transform 0.3s ease;
+  }
+}
+
+.map-section {
+  width: 100%;
+  text-align: center;
+  background-color: $color-bg-icon;
+  padding: 20px;
+  margin-block: 20px;
+}

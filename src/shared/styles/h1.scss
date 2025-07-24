@@ -1,0 +1,25 @@
+@use "../../variables" as *;
+
+.heading {
+  span {
+    position: relative;
+    font-weight: $font-bold;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 15%;
+      background: $color-simorange;
+    }
+  }
+
+  font-weight: $font-semibold;
+  font-size: $font-big;
+  display: flex;
+  gap: 10px;
+  display: inline-flex;
+}
