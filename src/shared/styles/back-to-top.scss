@@ -1,0 +1,50 @@
+@use "../../variables" as *;
+
+.back-to-top {
+  position: fixed;
+  bottom: $spacing-xl;
+  left: $spacing-xl;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $gradient-blue;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  box-shadow: -1px 1px 10px 3px rgb(35 92 147 / 78%);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  z-index: 999999;
+  animation: float 4s ease infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 -4px 10px rgba(255, 165, 0, 0.2);
+  }
+}
+
+body.dark-mode {
+  .back-to-top {
+    background: $gradient-blue-orange;
+  }
+}

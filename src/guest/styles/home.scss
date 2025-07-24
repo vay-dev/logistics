@@ -393,6 +393,95 @@
     transition: transform 0.3s ease;
   }
 }
+// Dark mode overrides
+body.dark-mode {
+  .content-wrapper {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+  }
+
+  .price-checker-wrapper {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    .input-icon {
+      border: 1px solid $color-simblue;
+      input {
+        color: $color-dark-text;
+        background: transparent;
+      }
+      i {
+        color: $color-simblue;
+      }
+    }
+    .check-price-btn {
+      background-color: $color-simblue;
+      color: $color-dark-text;
+      &:hover {
+        background-color: color.adjust($color-simblue, $lightness: 10%);
+        color: $color-dark-text;
+      }
+    }
+  }
+
+  .services-container {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+  }
+
+  .freight-option {
+    background: $color-dark-bg;
+    color: $color-dark-text;
+    box-shadow: $medium-shadow;
+    .freight-icon {
+      box-shadow: $large-shadow;
+    }
+    .option-label {
+      color: $color-simorange;
+    }
+    p {
+      color: $color-dark-text;
+    }
+  }
+
+  .operations-mode-section {
+    background: linear-gradient(135deg, $color-dark-bg 0%, $color-simblue 100%);
+    .operation-content {
+      background: rgba($color-dark-bg, 0.95);
+      color: $color-dark-text;
+      border: 1px solid rgba($color-simblue, 0.2);
+      &::before {
+        background: linear-gradient(
+          90deg,
+          $color-simblue 0%,
+          $color-simorange 100%
+        );
+      }
+    }
+    .operation-title {
+      color: $color-simorange;
+    }
+    .operation-description {
+      color: $color-dark-text;
+    }
+    .operation-number {
+      background: linear-gradient(
+        135deg,
+        $color-simblue 0%,
+        $color-simorange 100%
+      );
+      color: $color-dark-text;
+    }
+    .operation-image-container {
+      background: transparent;
+    }
+  }
+
+  .map-section {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+  }
+}
 
 .map-section {
   width: 100%;

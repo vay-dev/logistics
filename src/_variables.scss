@@ -44,6 +44,16 @@ $spacing-xl: 3rem;
 $small-shadow: 0 0 10px rgba(black, 0.1);
 $medium-shadow: 0 4px 20px rgba(black, 0.15);
 $large-shadow: 0 8px 30px rgba(black, 0.2);
+$gradient-blue: linear-gradient(
+  135deg,
+  $color-simblue 0%,
+  $color-simdarkblue 100%
+);
+$gradient-blue-orange: linear-gradient(
+  135deg,
+  $color-simblue 0%,
+  $color-simorange 100%
+);
 
 @mixin flex-style {
   display: flex;
