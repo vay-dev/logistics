@@ -3,11 +3,70 @@
 @use "../../variables" as *;
 @use "sass:color";
 
+body {
+  --bg-primary: #{$color-light-bg};
+  --bg-secondary: #{$color-white};
+  --text-primary: #{$color-light-text};
+  --text-secondary: #{$color-text1};
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #{$color-simblue};
+  --form-bg: rgba(255, 255, 255, 0.95);
+  --success-color: #10b981;
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+// Dark Mode Colors
+body.dark-mode {
+  --bg-primary: #{$color-dark-bg};
+  --bg-secondary: #{color-mix(in srgb, $color-simdarkblue 90%, black 10%)};
+  --text-primary: #{$color-dark-text};
+  --text-secondary: #{$color-text2};
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --accent-color: #{$color-simblue};
+  --form-bg: rgba(45, 55, 72, 0.95);
+  --success-color: #34d399;
+
+  background-color: var(--bg-primary);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 100;
+
+  .theme-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--form-bg);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 25px var(--shadow-color);
+    }
+  }
+}
+
 .content-wrapper {
   width: 100%;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
 
   .hero-section {
     padding: 20px;
+    background-color: var(--bg-primary);
 
     .row {
       #first-content {
@@ -51,14 +110,16 @@
 
 .price-wrapper {
   padding: $spacing-xl;
+  background-color: var(--bg-primary);
+
   .price-checker-wrapper {
     display: flex;
     width: 100%;
     padding: $spacing-lg !important;
     gap: 1rem;
     border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-    background-color: white;
+    box-shadow: 0 0 20px var(--shadow-color);
+    background-color: var(--bg-secondary);
 
     .input-group {
       display: flex;
@@ -69,6 +130,7 @@
         font-weight: $font-bold;
         margin-bottom: 0.25rem;
         font-size: $font-normal;
+        color: var(--text-primary);
       }
 
       .input-icon {
@@ -88,7 +150,8 @@
           outline: none;
           width: 100%;
           font-size: 0.95rem;
-          color: $color-text1;
+          color: var(--text-primary);
+          background: transparent;
         }
       }
     }
@@ -115,7 +178,7 @@
 }
 
 .services-container {
-  background-color: #f8fafb;
+  background-color: var(--bg-primary);
   position: relative;
   padding: $spacing-xl;
   z-index: -1 !important;
@@ -134,13 +197,15 @@
   gap: 2rem;
   justify-content: center;
   margin-block: $spacing-xl;
+  background-color: var(--bg-primary);
+  padding: $spacing-lg 0;
 
   .freight-option {
     flex: 1 1 280px;
     max-width: 350px;
     padding: 1.5rem;
     border-radius: 12px;
-    background: white;
+    background: var(--bg-secondary);
     box-shadow: $small-shadow;
     display: flex;
     flex-direction: column;
@@ -162,16 +227,20 @@
       box-shadow: $medium-shadow;
       font-size: 1.5rem;
       margin-bottom: 1rem;
+      color: var(--accent-color);
+      background: var(--bg-primary);
     }
 
     .option-label {
       font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      color: var(--text-primary);
     }
 
     p {
       font-size: 0.95rem;
+      color: var(--text-secondary);
     }
   }
 }
@@ -179,7 +248,7 @@
 .operations-mode-section {
   padding: $spacing-xl;
   margin-block: $spacing-xl;
-  background: linear-gradient(135deg, #f8fafb 0%, #e8f4f8 100%);
+  background-color: var(--bg-primary);
   position: relative;
   overflow: hidden;
 
@@ -240,9 +309,9 @@
 
   .operation-content {
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--form-bg);
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px var(--shadow-color);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
@@ -286,12 +355,12 @@
   .operation-title {
     font-size: 1.8rem;
     font-weight: 600;
-    color: $color-simdarkblue;
+    color: var(--text-primary);
     margin-bottom: 1rem;
   }
 
   .operation-description {
-    color: $color-text1;
+    color: var(--text-secondary);
     line-height: 1.7;
     font-size: 1rem;
   }
@@ -393,62 +462,92 @@
     transition: transform 0.3s ease;
   }
 }
+
+.map-section {
+  width: 100%;
+  text-align: center;
+  background-color: var(--bg-secondary);
+  padding: 20px;
+  margin-block: 20px;
+}
+
 // Dark mode overrides
 body.dark-mode {
   .content-wrapper {
-    background-color: $color-dark-bg;
-    color: $color-dark-text;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
   }
 
-  .price-checker-wrapper {
-    background-color: $color-dark-bg;
-    color: $color-dark-text;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-    .input-icon {
-      border: 1px solid $color-simblue;
-      input {
-        color: $color-dark-text;
-        background: transparent;
+  .hero-section {
+    background-color: var(--bg-primary);
+  }
+
+  .price-wrapper {
+    background-color: var(--bg-primary);
+
+    .price-checker-wrapper {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      box-shadow: 0 0 20px var(--shadow-color);
+
+      .input-icon {
+        border: 1px solid $color-simblue;
+        input {
+          color: var(--text-primary);
+          background: transparent;
+        }
+        i {
+          color: $color-simblue;
+        }
       }
-      i {
-        color: $color-simblue;
-      }
-    }
-    .check-price-btn {
-      background-color: $color-simblue;
-      color: $color-dark-text;
-      &:hover {
-        background-color: color.adjust($color-simblue, $lightness: 10%);
-        color: $color-dark-text;
+      .check-price-btn {
+        background-color: $color-simblue;
+        color: var(--text-primary);
+        &:hover {
+          background-color: color.adjust($color-simblue, $lightness: 10%);
+          color: var(--text-primary);
+        }
       }
     }
   }
 
   .services-container {
-    background-color: $color-dark-bg;
-    color: $color-dark-text;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
   }
 
-  .freight-option {
-    background: $color-dark-bg;
-    color: $color-dark-text;
-    box-shadow: $medium-shadow;
-    .freight-icon {
-      box-shadow: $large-shadow;
-    }
-    .option-label {
-      color: $color-simorange;
-    }
-    p {
-      color: $color-dark-text;
+  .freight-options {
+    background-color: var(--bg-primary);
+
+    .freight-option {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      box-shadow: $medium-shadow;
+
+      .freight-icon {
+        box-shadow: $large-shadow;
+        background: var(--bg-primary);
+        color: var(--accent-color);
+      }
+      .option-label {
+        color: $color-simorange;
+      }
+      p {
+        color: var(--text-secondary);
+      }
     }
   }
 
   .operations-mode-section {
-    background: linear-gradient(135deg, $color-dark-bg 0%, $color-simblue 100%);
+    background: linear-gradient(
+      135deg,
+      var(--bg-primary) 0%,
+      #{color-mix(in srgb, $color-simblue 20%, var(--bg-primary) 80%)} 100%
+    );
+
     .operation-content {
-      background: rgba($color-dark-bg, 0.95);
-      color: $color-dark-text;
+      background: var(--form-bg);
+      color: var(--text-primary);
       border: 1px solid rgba($color-simblue, 0.2);
       &::before {
         background: linear-gradient(
@@ -462,7 +561,7 @@ body.dark-mode {
       color: $color-simorange;
     }
     .operation-description {
-      color: $color-dark-text;
+      color: var(--text-secondary);
     }
     .operation-number {
       background: linear-gradient(
@@ -470,7 +569,7 @@ body.dark-mode {
         $color-simblue 0%,
         $color-simorange 100%
       );
-      color: $color-dark-text;
+      color: var(--text-primary);
     }
     .operation-image-container {
       background: transparent;
@@ -478,15 +577,7 @@ body.dark-mode {
   }
 
   .map-section {
-    background-color: $color-dark-bg;
-    color: $color-dark-text;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
   }
-}
-
-.map-section {
-  width: 100%;
-  text-align: center;
-  background-color: $color-bg-icon;
-  padding: 20px;
-  margin-block: 20px;
 }

@@ -1,5 +1,6 @@
 import "./styles/home.scss";
 import rider from "../assets/rider.png";
+import rider2 from "../assets/rider-bg-removed.png";
 import store from "../assets/store.png";
 import delievery from "../assets/delievery.png";
 import GuestBar from "./navbar";
@@ -7,8 +8,24 @@ import AppH1 from "../shared/h1-component";
 import ServiceIcon from "../shared/service-icon";
 import maps from "../assets/maps.png";
 import Footer from "./footer.jsx"; // Import the Footer component
+import { useState, useEffect } from "react";
 
 const Home = () => {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
+
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    document.body.classList.toggle("dark-mode", newMode);
+    localStorage.setItem("darkMode", newMode);
+  };
+
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+  }, [darkMode]);
+
   const freightOptions = [
     {
       label: "Warehousing Services",
@@ -83,6 +100,11 @@ const Home = () => {
   return (
     <>
       <GuestBar />
+      <div className="theme-toggle">
+        <button className="theme-btn" onClick={() => toggleDarkMode()}>
+          <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
+        </button>
+      </div>
       <div className="content-wrapper">
         <div className="hero-section container-fluid mt-4">
           <div className="row">
@@ -104,7 +126,7 @@ const Home = () => {
               </div>
             </div>
             <div id="second-content" className="col-md-6">
-              <img src={rider} alt="rider-img" />
+              <img src={rider2} alt="rider-img" />
             </div>
           </div>
         </div>
