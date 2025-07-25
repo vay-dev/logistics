@@ -5,7 +5,6 @@ const GuestBar = () => {
   const navLinks = [
     { label: "Home", href: "/home" },
     { label: "Services", href: "/services" },
-    { label: "Pricing", href: "/pricing" },
     { label: "Track Order", href: "/track" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },

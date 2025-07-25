@@ -1,6 +1,12 @@
 @use "../../variables" as *;
 @use "sass:color";
 
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 html,
 body {
   height: 100%;
@@ -118,8 +124,65 @@ body {
         padding: 2rem;
 
         .content-con {
+          position: relative;
           width: 100%;
           max-width: 500px;
+
+          .top-right-nav {
+            position: absolute;
+            top: -5rem;
+            left: -3rem;
+            z-index: 100;
+            display: flex;
+            @include flex-style;
+
+            @media (max-width: 768px) {
+              top: 2rem;
+              left: 2rem;
+            }
+
+            a {
+              position: relative;
+              display: inline-block;
+              font-weight: 600;
+              background: linear-gradient(
+                135deg,
+                var(--text-primary),
+                var(--accent-color)
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              text-fill-color: transparent;
+              transition: all 0.3s ease;
+
+              &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -4px;
+                height: 2px;
+                width: 100%;
+                background: linear-gradient(
+                  135deg,
+                  var(--text-primary),
+                  var(--accent-color)
+                );
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.3s ease;
+              }
+
+              &:hover::after {
+                transform: scaleX(1);
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                opacity: 0.8;
+              }
+            }
+          }
         }
       }
 

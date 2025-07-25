@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styles/signup.scss";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const url = "https://electronic-gertrudis-chanel-debb-bad97784.koyeb.app";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [agreeTerms, setAgreeTerms] = useState(false);
@@ -30,7 +32,7 @@ const Signup = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreeTerms) {
       setError("Please agree to the terms and privacy policy");
@@ -39,11 +41,31 @@ const Signup = () => {
     setLoading(true);
     setError(null);
 
-    // Your signup logic here
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${url}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create account");
+      }
+
+      toast.success("Account created successfully!");
+    } catch (error) {
+      setError(
+        error.message || "An error occurred while creating your account"
+      );
+      toast.error(
+        error.message || "An error occurred while creating your account"
+      );
+    } finally {
       setLoading(false);
-      console.log("Signup data:", formData);
-    }, 2000);
+    }
   };
 
   return (
@@ -67,6 +89,11 @@ const Signup = () => {
             className={`col-lg-6 ${isVisible ? "slide-in-left" : ""}`}
           >
             <div className="content-con">
+              <div className="top-right-nav">
+                <Link to="/" className="back-home-link">
+                  <i className="fas fa-home"></i> Home
+                </Link>
+              </div>
               <div className="text-con">
                 <div className="logo-animation">
                   <div className="logo-icon">
@@ -132,7 +159,9 @@ const Signup = () => {
               <form className="form glass-effect" onSubmit={handleSubmit}>
                 <div className="form-header">
                   <h1 className="form-title">Sign in</h1>
-                  <p className="side-text">Create your account in a seconds</p>
+                  <span className="side-text">
+                    Create your account in a seconds
+                  </span>
                 </div>
 
                 {error && (

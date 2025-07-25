@@ -1,14 +1,11 @@
-import "./styles/home.scss";
+import { useState, useEffect } from "react";
 import rider from "../assets/rider.png";
 import rider2 from "../assets/rider-bg-removed.png";
 import store from "../assets/store.png";
 import delievery from "../assets/delievery.png";
-import GuestBar from "./navbar";
-import AppH1 from "../shared/h1-component";
-import ServiceIcon from "../shared/service-icon";
+import AppH1 from "../shared/h1-component.jsx";
+import ServiceIcon from "../shared/service-icon.jsx";
 import maps from "../assets/maps.png";
-import Footer from "./footer.jsx"; // Import the Footer component
-import { useState, useEffect } from "react";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -96,10 +93,8 @@ const Home = () => {
       },
     },
   ];
-
   return (
     <>
-      <GuestBar />
       <div className="theme-toggle">
         <button className="theme-btn" onClick={() => toggleDarkMode()}>
           <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
@@ -220,7 +215,6 @@ const Home = () => {
           <img src={maps} alt="map" className="map-image img-fluid" />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

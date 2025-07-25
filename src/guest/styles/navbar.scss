@@ -16,6 +16,7 @@ header {
   gap: 3rem;
   background-color: $color-light-bg;
   color: contrast-color($color-light-bg);
+  box-shadow: -4px 0 15px rgba($color: #000000, $alpha: 0.3);
 
   h1 {
     font-size: $font-big;

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styles/login.scss";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const url = "https://electronic-gertrudis-chanel-debb-bad97784.koyeb.app";
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,11 +18,35 @@ const Login = () => {
   }, []);
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Your login logic here
-    setTimeout(() => setLoading(false), 2000); // Simulate API call
+    const formData = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch(`${url}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create account");
+      }
+
+      toast.success("Login successfully!");
+    } catch (error) {
+      setError(error.message || "An error occurred Logging in");
+      toast.error(error.message || "An error occurred while Logging in");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,6 +70,11 @@ const Login = () => {
             className={`col-lg-6 ${isVisible ? "slide-in-left" : ""}`}
           >
             <div className="content-con">
+              <div className="top-right-nav">
+                <Link to="/" className="back-home-link">
+                  <i className="fas fa-home"></i> Home
+                </Link>
+              </div>
               <div className="text-con">
                 <div className="logo-animation">
                   <div className="logo-icon">
@@ -121,8 +152,8 @@ const Login = () => {
                     <input
                       type="email"
                       placeholder="Email Address"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={email}
+                      onChange={(e) => setemail(e.target.value)}
                       className="animated-input"
                       required
                     />
