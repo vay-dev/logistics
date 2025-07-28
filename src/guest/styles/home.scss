@@ -664,8 +664,14 @@ body.dark-mode {
       background: var(--bg-secondary);
       border-radius: 20px;
       box-shadow: $large-shadow;
+      overflow: hidden;
       animation: slideInRight 0.8s ease-out 0.4s both;
-      // Add your services hero image here (logistics/warehousing scene)
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1837,8 +1843,21 @@ body.dark-mode {
       height: 400px;
       background: var(--bg-secondary);
       border-radius: 20px;
+      overflow: hidden;
       box-shadow: $large-shadow;
       animation: slideInRight 0.8s ease-out 0.4s both;
+
+      &:hover img {
+        transform: scale(1.02);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        transition: 0.3s ease-in-out;
+        object-fit: cover;
+        transition: 0.3s ease-in-out;
+      }
       // Add your about us hero image here (team/office scene)
     }
 
@@ -3202,3 +3221,229 @@ body.dark-mode {
 }
 
 /* ==================== CONTACT PAGE STYLES END ==================== */
+
+/***** GLOBAL HERO STYLES *****/
+.hero-image {
+  overflow: hidden !important;
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: 0.3s ease-in-out;
+  }
+}
+/***** End GLOBAL HERO STYLES *****/
+// Add this to your existing contact page styles
+
+.contact-form {
+  .input-group {
+    .input-wrapper {
+      // Enhanced autofill styling (this fixes the white background issue)
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:focus,
+      select:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--form-bg) inset !important;
+        -webkit-text-fill-color: var(--text-primary) !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+
+      // Custom select styling
+      select {
+        flex: 1;
+        padding: $spacing-md;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 1rem;
+        cursor: pointer;
+
+        // Remove default arrow
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        // Custom arrow
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right $spacing-md center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        padding-right: calc(
+          #{$spacing-md} + 20px
+        ); // Make room for custom arrow
+
+        &::placeholder {
+          color: var(--text-secondary);
+        }
+
+        // Style for options
+        option {
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+          padding: $spacing-sm;
+
+          &:hover {
+            background-color: var(--accent-color);
+            color: white;
+          }
+
+          &:checked {
+            background-color: var(--accent-color);
+            color: white;
+          }
+        }
+
+        // Focus states
+        &:focus {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233a2c78' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+      }
+
+      // Dark mode specific select styling
+      body.dark-mode & {
+        select {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a4a4a4' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+
+          &:focus {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23f47e60' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          option {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Enhanced autofill fix for all inputs
+.contact-form {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--form-bg) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    caret-color: var(--text-primary) !important;
+  }
+
+  // For Firefox
+  input:-moz-autofill {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+  }
+
+  // Additional fix for autofill text color
+  input[data-autocompleted] {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+  }
+}
+
+// Alternative Custom Select (if you want even more control)
+// You can replace your select with this custom dropdown
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  .select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--shadow-color);
+    }
+
+    &.active {
+      border-color: var(--accent-color);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 25px rgba($color-simblue, 0.2);
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+      color: var(--text-secondary);
+
+      &.rotated {
+        transform: rotate(180deg);
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  .select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    box-shadow: $large-shadow;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .option {
+      padding: $spacing-md;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      &:hover {
+        background: var(--accent-color);
+        color: white;
+        transform: translateX(5px);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.selected {
+        background: rgba($color-simblue, 0.1);
+        color: var(--accent-color);
+        font-weight: $font-semibold;
+      }
+    }
+  }
+}

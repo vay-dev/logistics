@@ -100,7 +100,7 @@ const Services = () => {
               </p>
             </div>
             <div className="hero-image">
-              {/* Add logistics/services hero image here */}
+              <img src="/images/global.png" alt="image" />
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import AppH1 from "../shared/h1-component.jsx";
 import ServiceIcon from "../shared/service-icon.jsx";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -38,18 +40,41 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Thank you for your message! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-    }, 2000);
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    emailjs
+      .send(
+        "service_6tprcqf", // replace with your actual service ID
+        "template_br9mx9m", // replace with your template ID
+        templateParams,
+        "z_rz1HBDj-dGUXvCL" // replace with your EmailJS public key
+      )
+      .then(
+        (response) => {
+          toast.success(
+            "Message sent successfully! We'll get back to you soon."
+          );
+
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            subject: "",
+            message: "",
+          });
+          setIsSubmitting(false);
+        },
+        (error) => {
+          toast.error("Something went wrong. Please try again.");
+          setIsSubmitting(false);
+        }
+      );
   };
 
   const contactInfo = [

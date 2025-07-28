@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AppH1 from "../shared/h1-component.jsx";
 import ServiceIcon from "../shared/service-icon.jsx";
+import emailjs from "@emailjs/browser";
 
 const About = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -105,7 +106,7 @@ const About = () => {
               </p>
             </div>
             <div className="hero-image">
-              {/* Add about us hero image here - team/office/warehouse scene */}
+              <img src="images/logistic-team.png" alt="Logistics Team" />
             </div>
           </div>
         </div>
@@ -132,8 +133,8 @@ const About = () => {
                   our customers.
                 </p>
               </div>
-              <div className="story-image">
-                {/* Add company story/timeline image here */}
+              <div className="story-image hero-image">
+                <img src="images/timeline.png" alt="timeline image" />
               </div>
             </div>
           </div>
