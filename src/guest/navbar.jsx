@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const GuestBar = () => {
   const navLinks = [
-    { label: "Home", href: "/home" },
+    { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Track Order", href: "/track" },
     { label: "About Us", href: "/about" },

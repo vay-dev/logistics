@@ -110,7 +110,7 @@
       position: relative;
 
       &:hover {
-        color: #3498db;
+        color: $color-simlightblue;
         transform: translateX(5px);
       }
 
@@ -121,7 +121,7 @@
         left: 0;
         width: 0;
         height: 1px;
-        background: #3498db;
+        background: $color-simorange;
         transition: width 0.3s ease;
       }
 

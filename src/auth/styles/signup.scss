@@ -21,6 +21,7 @@ body {
     --text-secondary: #{$color-text1};
     --shadow-color: rgba(0, 0, 0, 0.1);
     --accent-color: #{$color-simblue};
+    --alt-accent-color: #{$color-simlightblue};
     --form-bg: rgba(255, 255, 255, 0.95);
     --success-color: #10b981;
   }
@@ -33,6 +34,7 @@ body {
     --text-secondary: #{$color-text2};
     --shadow-color: rgba(0, 0, 0, 0.3);
     --accent-color: #{$color-simblue};
+    --alt-accent-color: #{$color-simlightblue};
     --form-bg: rgba(45, 55, 72, 0.95);
     --success-color: #34d399;
   }
@@ -629,7 +631,7 @@ body {
             margin: 1.5rem 0;
 
             .login-link {
-              color: var(--accent-color);
+              color: var(--alt-accent-color);
               text-decoration: none;
               font-weight: 600;
               position: relative;
@@ -642,7 +644,7 @@ body {
                 left: 0;
                 width: 0;
                 height: 2px;
-                background: var(--accent-color);
+                background: var(--alt-accent-color);
                 transition: width 0.3s ease;
               }
 
