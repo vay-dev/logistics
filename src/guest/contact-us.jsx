@@ -3,6 +3,7 @@ import AppH1 from "../shared/h1-component.jsx";
 import ServiceIcon from "../shared/service-icon.jsx";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
+import ContactMap from "./contact-map.jsx";
 
 const Contact = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -50,10 +51,10 @@ const Contact = () => {
 
     emailjs
       .send(
-        "service_6tprcqf", // replace with your actual service ID
-        "template_br9mx9m", // replace with your template ID
+        "service_6tprcqf",
+        "template_br9mx9m",
         templateParams,
-        "z_rz1HBDj-dGUXvCL" // replace with your EmailJS public key
+        "z_rz1HBDj-dGUXvCL"
       )
       .then(
         (response) => {
@@ -311,12 +312,7 @@ const Contact = () => {
               </div>
 
               <div className="map-container">
-                <div className="map-placeholder">
-                  <i className="fas fa-map-marked-alt"></i>
-                  <p>Interactive Map</p>
-                  <span>Lagos, Nigeria Office Location</span>
-                </div>
-                {/* Replace with actual map integration */}
+                <ContactMap />
               </div>
             </div>
           </div>
