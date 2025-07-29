@@ -1,5 +1,5 @@
 import "./styles/navbar.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const GuestBar = () => {
   const navLinks = [
@@ -20,20 +20,25 @@ const GuestBar = () => {
         <ul className="nav-links">
           {navLinks.map((link, index) => (
             <li key={index}>
-              <Link to={link.href} className="nav-link">
+              <NavLink
+                to={link.href}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
                 {link.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
 
         <div className="btn-con">
-          <Link to="/login" className="btn btn-outline">
+          <NavLink to="/login" className="btn btn-outline">
             Login
-          </Link>
-          <Link to="/signup" className="btn btn-filled">
+          </NavLink>
+          <NavLink to="/signup" className="btn btn-filled">
             Register
-          </Link>
+          </NavLink>
         </div>
       </header>
     </>
