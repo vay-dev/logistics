@@ -125,7 +125,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="price-wrapper">
+        {/* <div className="price-wrapper">
           <div className="price-checker-wrapper">
             <div className="input-group">
               <label htmlFor="origin">Origin</label>
@@ -150,7 +150,7 @@ const Home = () => {
             </div>
             <button className="check-price-btn">Check Price</button>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="services-container">
         <div className="service-heading">

@@ -69,9 +69,11 @@ body.dark-mode {
 
   .hero-section {
     padding: 20px;
+    width: 100% !important;
     background-color: var(--bg-primary);
 
     .row {
+      width: 100% !important;
       #first-content {
         .content-container {
           text-align: center;
@@ -92,7 +94,7 @@ body.dark-mode {
         }
 
         .button-group {
-          display: flex;
+          @include flex-style;
           gap: 10px;
           margin-left: auto;
 
@@ -113,6 +115,7 @@ body.dark-mode {
 
       #second-content {
         overflow: hidden;
+        @include flex-style;
         animation: slideright 1s ease-in;
 
         & {
@@ -138,74 +141,74 @@ body.dark-mode {
   }
 }
 
-.price-wrapper {
-  padding: $spacing-xl;
-  background-color: var(--bg-primary);
+// .price-wrapper {
+//   padding: $spacing-xl;
+//   background-color: var(--bg-primary);
 
-  .price-checker-wrapper {
-    display: flex;
-    width: 100%;
-    padding: $spacing-lg !important;
-    gap: 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px var(--shadow-color);
-    background-color: var(--bg-secondary);
+//   .price-checker-wrapper {
+//     display: flex;
+//     width: 100%;
+//     padding: $spacing-lg !important;
+//     gap: 1rem;
+//     border-radius: 1rem;
+//     box-shadow: 0 0 20px var(--shadow-color);
+//     background-color: var(--bg-secondary);
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+//     .input-group {
+//       display: flex;
+//       flex-direction: column;
+//       flex: 1;
 
-      label {
-        font-weight: $font-bold;
-        margin-bottom: 0.25rem;
-        font-size: $font-normal;
-        color: var(--text-primary);
-      }
+//       label {
+//         font-weight: $font-bold;
+//         margin-bottom: 0.25rem;
+//         font-size: $font-normal;
+//         color: var(--text-primary);
+//       }
 
-      .input-icon {
-        display: flex;
-        align-items: center;
-        border: 1px solid $color-stroke;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
+//       .input-icon {
+//         display: flex;
+//         align-items: center;
+//         border: 1px solid $color-stroke;
+//         border-radius: 0.5rem;
+//         padding: 0.5rem;
 
-        i {
-          color: $color-simdarkblue;
-          margin-right: 0.5rem;
-        }
+//         i {
+//           color: $color-simdarkblue;
+//           margin-right: 0.5rem;
+//         }
 
-        input {
-          border: none;
-          outline: none;
-          width: 100%;
-          font-size: 0.95rem;
-          color: var(--text-primary);
-          background: transparent;
-        }
-      }
-    }
+//         input {
+//           border: none;
+//           outline: none;
+//           width: 100%;
+//           font-size: 0.95rem;
+//           color: var(--text-primary);
+//           background: transparent;
+//         }
+//       }
+//     }
 
-    .check-price-btn {
-      background-color: $color-simdarkblue;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      cursor: pointer;
-      align-self: end;
-      margin-top: 1.5rem;
+//     .check-price-btn {
+//       background-color: $color-simdarkblue;
+//       color: white;
+//       padding: 0.75rem 1.5rem;
+//       border: none;
+//       border-radius: 0.5rem;
+//       font-weight: 600;
+//       cursor: pointer;
+//       align-self: end;
+//       margin-top: 1.5rem;
 
-      &:hover {
-        background-color: color.adjust(
-          $color: $color-simdarkblue,
-          $lightness: 5%
-        );
-      }
-    }
-  }
-}
+//       &:hover {
+//         background-color: color.adjust(
+//           $color: $color-simdarkblue,
+//           $lightness: 5%
+//         );
+//       }
+//     }
+//   }
+// }
 
 .services-container {
   background-color: var(--bg-primary);
@@ -288,25 +291,27 @@ body.dark-mode {
     max-width: 1200px;
     margin: 0 auto;
     content: "";
-    .content-container {
-      text-align: center;
-      animation: slideleft 1s ease-in;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  }
+  @keyframes slideleft {
+    from {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
-      & {
-        @keyframes slideleft {
-          from {
-            opacity: 0;
-            transform: translateX(-15px);
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-      }
+  .content-container {
+    text-align: center;
+    animation: slideleft 1s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 1200px) {
+      margin-top: 8rem !important;
     }
   }
 
