@@ -6,11 +6,20 @@ import delievery from "../assets/delievery.png";
 import AppH1 from "../shared/h1-component.jsx";
 import ServiceIcon from "../shared/service-icon.jsx";
 import maps from "../assets/maps.png";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true";
   });
+
+  const confirmToken = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/user");
+    }
+  };
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
@@ -20,8 +29,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-  }, [darkMode]);
+    confirmToken();
+  }, []);
 
   const freightOptions = [
     {

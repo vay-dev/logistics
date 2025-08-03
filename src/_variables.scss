@@ -3,7 +3,6 @@ $font-primary: "Inter", sans-serif;
 $font-big: 1.5em;
 $font-normal: 1em;
 $font-small: 0.875em;
-
 $font-light: 300;
 $font-regular: 400;
 $font-medium: 500;
@@ -15,22 +14,28 @@ $color-simorange: #f47e60;
 $color-simdarkblue: #002c50;
 $color-simblue: #3a2c78;
 $color-simlightblue: #3498db;
-
 $color-text1: #3a3a3a;
 $color-text2: #a4a4a4;
 $color-text3: #e0e0e0;
-
 $color-bg-icon: #ffffff;
 $color-stroke: #f5f5f5;
 $color-linear: #807c7c;
-
 $color-white: #ffffff;
 $color-black: #000000;
+
+// Status Colors (based on your existing palette)
+$color-status-pending: #f47e60; // Using your simorange
+$color-status-pending-bg: #fef4f2; // Light version of simorange
+$color-status-processing: #3498db; // Using your simlightblue
+$color-status-processing-bg: #f0f8ff; // Light version of simlightblue
+$color-status-delivered: #27ae60; // Green that complements your blues
+$color-status-delivered-bg: #f0fdf4; // Light green
+$color-status-cancelled: #e74c3c; // Red that works with your palette
+$color-status-cancelled-bg: #fef2f2; // Light red
 
 // Theme Modes
 $color-light-bg: #ffffff;
 $color-light-text: $color-text1;
-
 $color-dark-bg: #0f172a;
 $color-dark-text: #f9fafb;
 
@@ -45,6 +50,7 @@ $spacing-xl: 3rem;
 $small-shadow: 0 0 10px rgba(black, 0.1);
 $medium-shadow: 0 4px 20px rgba(black, 0.15);
 $large-shadow: 0 8px 30px rgba(black, 0.2);
+
 $gradient-blue: linear-gradient(
   135deg,
   $color-simblue 0%,

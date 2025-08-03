@@ -37,7 +37,7 @@ body.dark-mode {
   position: fixed;
   top: 2rem;
   right: 2rem;
-  z-index: 150;
+  z-index: 1000000;
 
   .theme-btn {
     width: 50px;
@@ -101,6 +101,7 @@ body.dark-mode {
           .btn {
             @include button-base;
             @include button-size(medium);
+            transition: 0.3s ease-in-out !important;
           }
 
           .filled {

@@ -1,0 +1,931 @@
+@use "../../../variables" as *;
+@use "sass:color";
+
+// CSS Custom Properties for Theme Support
+:root {
+  // Light Mode (Default)
+  --dispatch-bg-primary: #{$color-stroke};
+  --dispatch-bg-secondary: #{$color-white};
+  --dispatch-text-primary: #{$color-text1};
+  --dispatch-text-secondary: #{$color-text2};
+  --dispatch-text-tertiary: #{$color-text3};
+  --dispatch-shadow-small: #{$small-shadow};
+  --dispatch-shadow-medium: #{$medium-shadow};
+  --dispatch-accent: #{$color-simlightblue};
+  --dispatch-accent-dark: #{$color-simblue};
+  --dispatch-gradient: #{$gradient-blue};
+  --dispatch-border: #{$color-text3};
+  --dispatch-hover-bg: #{$color-stroke};
+  --dispatch-input-bg: #{$color-white};
+}
+
+// Dark Mode Colors
+body.dark-mode {
+  --dispatch-bg-primary: #{$color-dark-bg};
+  --dispatch-bg-secondary: #{color-mix(
+      in srgb,
+      $color-simdarkblue 90%,
+      black 10%
+    )};
+  --dispatch-text-primary: #{$color-dark-text};
+  --dispatch-text-secondary: #{$color-text2};
+  --dispatch-text-tertiary: #{color-mix(in srgb, $color-text3 50%, white 50%)};
+  --dispatch-shadow-small: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --dispatch-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --dispatch-accent: #{$color-simlightblue};
+  --dispatch-accent-dark: #{$color-simblue};
+  --dispatch-gradient: linear-gradient(
+    135deg,
+    #{$color-simlightblue},
+    #{$color-simblue}
+  );
+  --dispatch-border: #{color-mix(in srgb, $color-text3 30%, white 70%)};
+  --dispatch-hover-bg: #{color-mix(in srgb, $color-simdarkblue 80%, white 20%)};
+  --dispatch-input-bg: #{color-mix(in srgb, $color-simdarkblue 85%, black 15%)};
+}
+
+// Main container
+.dispatches-container {
+  min-height: 100vh;
+  background-color: var(--dispatch-bg-primary);
+  font-family: $font-primary;
+}
+
+// Header
+.dispatches-header {
+  background-color: var(--dispatch-bg-secondary);
+  border-bottom: 1px solid var(--dispatch-border);
+  box-shadow: var(--dispatch-shadow-small);
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+    @include flex-style;
+    justify-content: space-between;
+    height: 4rem;
+
+    .header-title {
+      font-size: $font-big;
+      font-weight: $font-bold;
+      color: var(--dispatch-text-primary);
+      margin: 0;
+    }
+
+    .header-subtitle {
+      font-size: $font-small;
+      color: var(--dispatch-text-secondary);
+    }
+
+    .signout-button {
+      background: none;
+      border: none;
+      color: var(--dispatch-text-secondary);
+      font-size: $font-small;
+      cursor: pointer;
+      padding: $spacing-xs;
+      border-radius: 4px;
+
+      &:hover {
+        color: var(--dispatch-text-primary);
+        background-color: var(--dispatch-hover-bg);
+      }
+    }
+  }
+}
+
+// Auth wrapper
+.auth-wrapper {
+  flex: 1;
+  @include flex-style;
+  padding: $spacing-md;
+  min-height: calc(100vh - 4rem);
+}
+
+.auth-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+// Auth header
+.auth-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  .auth-icon {
+    width: 3rem;
+    height: 3rem;
+    background: var(--dispatch-gradient);
+    border-radius: 50%;
+    @include flex-style;
+    margin: 0 auto $spacing-md;
+    color: $color-white;
+  }
+
+  .auth-title {
+    font-size: 2rem;
+    font-weight: $font-bold;
+    color: var(--dispatch-text-primary);
+    margin: 0 0 $spacing-xs;
+  }
+
+  .auth-description {
+    font-size: $font-small;
+    color: var(--dispatch-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// Login form
+.login-form {
+  background: var(--dispatch-bg-secondary);
+  padding: $spacing-xl;
+  border-radius: 12px;
+  box-shadow: var(--dispatch-shadow-medium);
+}
+
+.form-fields {
+  margin-bottom: $spacing-lg;
+
+  .form-field {
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.field-label {
+  display: block;
+  font-size: $font-small;
+  font-weight: $font-medium;
+  color: var(--dispatch-text-primary);
+  margin-bottom: $spacing-xs;
+}
+
+.input-wrapper {
+  position: relative;
+
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dispatch-text-secondary);
+    pointer-events: none;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    padding-left: 44px;
+    border: 2px solid var(--dispatch-border);
+    border-radius: 8px;
+    font-size: $font-normal;
+    font-family: $font-primary;
+    color: var(--dispatch-text-primary);
+    background: var(--dispatch-input-bg);
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--dispatch-accent);
+    }
+
+    &::placeholder {
+      color: var(--dispatch-text-secondary);
+    }
+
+    &.password-input {
+      padding-right: 44px;
+    }
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--dispatch-text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+
+    &:hover {
+      color: var(--dispatch-text-primary);
+    }
+  }
+}
+
+// Form options
+.form-options {
+  @include flex-style;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+}
+
+.remember-me {
+  @include normal-flex;
+  align-items: center;
+
+  .checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--dispatch-accent);
+  }
+
+  .checkbox-label {
+    font-size: $font-small;
+    color: var(--dispatch-text-primary);
+    cursor: pointer;
+  }
+}
+
+.forgot-password {
+  .link {
+    font-size: $font-small;
+    color: var(--dispatch-accent);
+    text-decoration: none;
+    font-weight: $font-medium;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Submit button
+.form-submit {
+  margin-bottom: $spacing-lg;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--dispatch-gradient);
+  color: $color-white;
+  border: none;
+  border-radius: 8px;
+  font-size: $font-normal;
+  font-weight: $font-medium;
+  font-family: $font-primary;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+
+  &:hover:not(.loading) {
+    transform: translateY(-1px);
+  }
+
+  &:active:not(.loading) {
+    transform: translateY(0);
+  }
+
+  &.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .loading-content {
+    @include normal-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid $color-white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* Spinner Animation */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Signup link
+.signup-link {
+  text-align: center;
+
+  .signup-text {
+    font-size: $font-small;
+    color: var(--dispatch-text-secondary);
+
+    .link {
+      color: var(--dispatch-accent);
+      text-decoration: none;
+      font-weight: $font-medium;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Authenticated content
+.dispatches-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-lg $spacing-md;
+}
+
+.content-header {
+  @include flex-style;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+  align-items: flex-end;
+
+  .content-title {
+    h2 {
+      font-size: $font-big;
+      font-weight: $font-bold;
+      color: var(--dispatch-text-primary);
+      margin: 0 0 $spacing-xs;
+    }
+
+    .dispatch-count {
+      font-size: $font-small;
+      color: var(--dispatch-text-secondary);
+      font-weight: $font-medium;
+    }
+  }
+
+  .refresh-btn {
+    background: var(--dispatch-bg-secondary);
+    border: 2px solid var(--dispatch-accent);
+    color: var(--dispatch-accent);
+    padding: $spacing-xs $spacing-md;
+    border-radius: 8px;
+    font-size: $font-small;
+    font-weight: $font-medium;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--dispatch-accent);
+      color: $color-white;
+    }
+  }
+}
+
+// Error and Empty States
+.error-state,
+.empty-state {
+  @include flex-style;
+  min-height: 300px;
+  background: var(--dispatch-bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--dispatch-shadow-small);
+
+  .error-content,
+  .empty-content {
+    text-align: center;
+    padding: $spacing-xl;
+
+    h3 {
+      font-size: $font-big;
+      font-weight: $font-semibold;
+      color: var(--dispatch-text-primary);
+      margin: 0 0 $spacing-sm;
+    }
+
+    p {
+      color: var(--dispatch-text-secondary);
+      margin: 0 0 $spacing-md;
+      line-height: 1.5;
+    }
+
+    .retry-btn {
+      background: var(--dispatch-gradient);
+      color: $color-white;
+      border: none;
+      padding: $spacing-sm $spacing-md;
+      border-radius: 8px;
+      font-size: $font-small;
+      font-weight: $font-medium;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Dispatches List
+.dispatches-list {
+  @include normal-flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.dispatch-card {
+  background: var(--dispatch-bg-secondary);
+  border-radius: 12px;
+  padding: $spacing-lg;
+  box-shadow: var(--dispatch-shadow-small);
+  border: 1px solid var(--dispatch-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--dispatch-shadow-medium);
+  }
+}
+
+.dispatch-header {
+  @include flex-style;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 1px solid var(--dispatch-border);
+
+  .dispatch-code {
+    @include normal-flex;
+    align-items: center;
+
+    .code-label {
+      font-size: $font-small;
+      color: var(--dispatch-text-secondary);
+      font-weight: $font-medium;
+    }
+
+    .code-value {
+      font-size: $font-normal;
+      color: var(--dispatch-text-primary);
+      font-weight: $font-bold;
+      font-family: "Monaco", "Consolas", monospace;
+      background: var(--dispatch-hover-bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+  }
+
+  .status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: $font-small;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &.status-pending {
+      background: $color-status-pending-bg;
+      color: $color-status-pending;
+    }
+
+    &.status-processing {
+      background: $color-status-processing-bg;
+      color: $color-status-processing;
+    }
+
+    &.status-delivered {
+      background: $color-status-delivered-bg;
+      color: $color-status-delivered;
+    }
+
+    &.status-cancelled {
+      background: $color-status-cancelled-bg;
+      color: $color-status-cancelled;
+    }
+  }
+}
+
+.dispatch-content {
+  margin-bottom: $spacing-md;
+
+  .content-text,
+  .note-text {
+    margin-bottom: $spacing-sm;
+    line-height: 1.5;
+
+    strong {
+      color: var(--dispatch-text-primary);
+      font-weight: $font-semibold;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .content-text {
+    color: var(--dispatch-text-primary);
+  }
+
+  .note-text {
+    color: var(--dispatch-text-secondary);
+    font-style: italic;
+  }
+}
+
+.dispatch-details {
+  margin-bottom: $spacing-md;
+
+  .detail-row {
+    @include flex-style;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+    gap: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .detail-item {
+    flex: 1;
+    @include normal-flex;
+    justify-content: space-between;
+
+    .detail-label {
+      font-size: $font-small;
+      color: var(--dispatch-text-secondary);
+      font-weight: $font-medium;
+    }
+
+    .detail-value {
+      font-size: $font-small;
+      color: var(--dispatch-text-primary);
+      font-weight: $font-semibold;
+    }
+  }
+}
+
+.dispatch-ids {
+  padding-top: $spacing-sm;
+  border-top: 1px solid var(--dispatch-border);
+
+  .id-item {
+    @include flex-style;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .id-label {
+      font-size: $font-small;
+      color: var(--dispatch-text-secondary);
+      font-weight: $font-medium;
+    }
+
+    .id-value {
+      font-size: $font-small;
+      color: var(--dispatch-text-primary);
+      font-family: "Monaco", "Consolas", monospace;
+      background: var(--dispatch-hover-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.dispatch-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  font-size: $font-normal;
+  color: var(--dispatch-accent-dark) !important;
+  font-weight: $font-bold;
+  text-align: center;
+
+  p {
+    color: var(--dispatch-accent-dark) !important;
+    font-size: $font-big;
+    font-weight: $font-bold;
+    animation: breathe 3s ease-in-out infinite;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// ADD DISPATCH FORM STYLES
+
+.add-dispatch-form {
+  background: var(--dispatch-bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--dispatch-shadow-small);
+  overflow: hidden;
+}
+
+.form-section {
+  padding: $spacing-xl;
+  border-bottom: 1px solid var(--dispatch-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section-header {
+  @include normal-flex;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-sm;
+  border-bottom: 2px solid var(--dispatch-accent);
+
+  svg {
+    color: var(--dispatch-accent);
+    margin-right: $spacing-sm;
+  }
+
+  h3 {
+    font-size: $font-big;
+    font-weight: $font-semibold;
+    color: var(--dispatch-text-primary);
+    margin: 0;
+  }
+}
+
+.form-row {
+  @include normal-flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+
+  .form-field {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-field {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: var(--dispatch-text-secondary);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .form-textarea {
+    width: 100%;
+    padding: 12px;
+    padding-left: 44px;
+    border: 2px solid var(--dispatch-border);
+    border-radius: 8px;
+    font-size: $font-normal;
+    font-family: $font-primary;
+    color: var(--dispatch-text-primary);
+    background: var(--dispatch-input-bg);
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--dispatch-accent);
+      box-shadow: 0 0 0 3px rgba(#3498db, 0.1);
+    }
+
+    &::placeholder {
+      color: var(--dispatch-text-secondary);
+    }
+  }
+}
+
+.form-submit {
+  padding: $spacing-xl;
+  background: var(--dispatch-hover-bg);
+  border-top: 1px solid var(--dispatch-border);
+
+  .submit-button {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--dispatch-gradient);
+    color: $color-white;
+    border: none;
+    border-radius: 8px;
+    font-size: $font-normal;
+    font-weight: $font-semibold;
+    font-family: $font-primary;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(.loading) {
+      transform: translateY(-2px);
+      box-shadow: var(--dispatch-shadow-medium);
+    }
+
+    &:active:not(.loading) {
+      transform: translateY(0);
+    }
+
+    &.loading {
+      opacity: 0.8;
+      cursor: not-allowed;
+    }
+
+    .loading-content {
+      @include normal-flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+
+      .spin {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+}
+
+// TRACK DISPATCH PAGE STYLES
+
+#container-fluid {
+  width: 100%;
+  height: 100px;
+  @include flex-style;
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 400px;
+    box-shadow: $large-shadow;
+    padding: 20px;
+    border-radius: 15px;
+
+    h1 {
+      font-size: $font-big;
+      font-weight: $font-bold;
+    }
+
+    .input-con {
+      @include normal-flex;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        transition: all 0.3s ease-in-out !important;
+        &:focus {
+          border: 1px solid #3498db !important;
+          box-shadow: 0 0 5px #3498db;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .auth-wrapper {
+    padding: $spacing-sm;
+  }
+
+  .login-form {
+    padding: $spacing-lg;
+  }
+
+  .form-options {
+    flex-direction: column;
+    gap: $spacing-sm;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    padding: 0 $spacing-sm;
+  }
+
+  .dispatches-content {
+    padding: $spacing-md $spacing-sm;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  .dispatch-card {
+    padding: $spacing-md;
+  }
+
+  .dispatch-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  .detail-item {
+    justify-content: space-between;
+  }
+
+  .id-item .id-value {
+    max-width: 150px;
+  }
+
+  // Add dispatch form responsive
+  .form-section {
+    padding: $spacing-lg;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+
+    .form-field {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    svg {
+      margin-right: 0;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  .form-submit {
+    padding: $spacing-lg;
+  }
+
+  .submit-button {
+    padding: 14px 20px;
+    font-size: $font-small;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-section {
+    padding: $spacing-md;
+  }
+
+  .form-submit {
+    padding: $spacing-md;
+  }
+
+  .input-wrapper {
+    .form-input,
+    .form-textarea {
+      padding-left: 12px;
+    }
+
+    .input-icon {
+      display: none;
+    }
+  }
+}
+
+// Helper function to convert hex to rgb (if not available in your variables)
+@function hex-to-rgb($hex) {
+  $color: unquote("#{$hex}"); // Converts '3498db' → #3498db
+  @return red($color), green($color), blue($color);
+}

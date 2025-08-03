@@ -1,0 +1,476 @@
+@use "../../variables" as *;
+@use "sass:color";
+
+// Theme setup
+:root {
+  --bg-primary: #{$color-dark-bg};
+  --bg-secondary: #{$color-stroke};
+  --text-primary: #{$color-light-text};
+  --text-secondary: #{$color-text2};
+  --border-color: #{$color-stroke};
+  --shadow: #{$small-shadow};
+}
+
+[data-theme="dark"] {
+  --bg-primary: #{$color-dark-bg};
+  --bg-secondary: #1e293b;
+  --text-primary: #{$color-dark-text};
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+// Layout styles
+.user-layout {
+  @include normal-flex;
+  min-height: 100vh;
+  gap: 0;
+  background-color: var(--bg-secondary); // This should now work
+  font-family: $font-primary;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+    background-color: var(
+      --bg-secondary
+    ); // Add this for main content background
+
+    @media (max-width: 768px) {
+      margin-left: 70px;
+    }
+
+    .top-bar {
+      @include normal-flex;
+      align-items: center !important;
+      justify-content: space-between;
+      padding: $spacing-md $spacing-lg;
+      background-color: var(--bg-primary) !important;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      .page-title {
+        font-size: $font-big;
+        font-weight: $font-semibold;
+        margin: 0;
+        color: var(--text-primary);
+      }
+
+      .top-bar-actions {
+        @include normal-flex;
+        gap: $spacing-md;
+
+        .theme-changer {
+          background-color: transparent !important;
+          color: var(--text-primary);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: $font-normal;
+
+          &:hover {
+            // color: $color-white;
+            transform: scale(1.1);
+          }
+
+          .theme-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px !important;
+            height: 40px !important;
+            border: none !important;
+            border-radius: 50%;
+            transition: all 0.3s ease-in-out !important;
+
+            i {
+              transition: all 0.3s ease-in-out !important;
+            }
+          }
+        }
+      }
+    }
+
+    .content-wrapper {
+      flex: 1;
+      padding: $spacing-lg;
+      background-color: var(--bg-secondary); // This was the main issue
+      color: var(--text-primary); // Add text color
+      overflow-y: auto;
+    }
+  }
+
+  // Fixed: Use class-based selector instead of :has()
+  &.sidebar-collapsed .main-content {
+    margin-left: 70px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+}
+
+// Sidebar styles
+.user-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 280px;
+  background: $gradient-blue; // Keep the gradient for sidebar
+  color: $color-white;
+  transition: width 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $medium-shadow;
+
+  &.collapsed {
+    width: 70px;
+
+    .sidebar-header .logo span,
+    .nav-text,
+    .user-details {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .sidebar-header {
+    @include normal-flex;
+    justify-content: space-between;
+    padding: $spacing-md;
+    border-bottom: 1px solid rgba($color-white, 0.1);
+    background-color: rgba(0, 0, 0, 0.1); // Add slight background
+
+    .logo {
+      @include flex-style;
+      gap: $spacing-sm;
+      font-size: 1.2em;
+      font-weight: $font-bold;
+
+      i {
+        color: $color-simorange;
+        font-size: 1.5em;
+      }
+
+      span {
+        transition: all 0.3s ease;
+        color: $color-white;
+      }
+    }
+
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: $color-white;
+      font-size: $font-normal;
+      cursor: pointer;
+      padding: $spacing-xs;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba($color-white, 0.1);
+      }
+    }
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: $spacing-md 0;
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .nav-item {
+        margin-bottom: $spacing-xs;
+
+        .nav-link {
+          @include normal-flex;
+          gap: $spacing-sm;
+          padding: $spacing-sm $spacing-md;
+          color: rgba($color-white, 0.8);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          border-radius: 0 25px 25px 0;
+          margin-right: $spacing-md;
+          font-weight: $font-medium;
+          position: relative;
+
+          i {
+            font-size: 1.1em;
+            width: 20px;
+            text-align: center;
+          }
+
+          .nav-text {
+            transition: all 0.3s ease;
+          }
+
+          &:hover {
+            background-color: rgba($color-white, 0.1);
+            color: $color-white;
+            transform: translateX(5px);
+          }
+
+          &.active {
+            background: $gradient-blue-orange;
+            color: $color-white;
+            box-shadow: $small-shadow;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: 0;
+              height: 100%;
+              width: 4px;
+              background-color: $color-simorange;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: $spacing-md;
+    border-top: 1px solid rgba($color-white, 0.1);
+
+    .user-info {
+      @include normal-flex;
+      gap: $spacing-sm;
+      cursor: pointer;
+      padding: $spacing-xs;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba($color-white, 0.1);
+      }
+
+      i {
+        font-size: 2em;
+        color: $color-simorange;
+      }
+
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+
+        .user-name {
+          font-weight: $font-medium;
+          font-size: $font-normal;
+          color: $color-white;
+        }
+
+        .user-role {
+          font-size: $font-small;
+          color: rgba($color-white, 0.7);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 70px;
+
+    &:not(.collapsed) {
+      width: 280px;
+    }
+
+    .sidebar-header .logo span,
+    .nav-text,
+    .user-details {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &:not(.collapsed) {
+      .sidebar-header .logo span,
+      .nav-text,
+      .user-details {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    &.collapsed {
+      transform: translateX(-100%);
+    }
+
+    &:not(.collapsed) {
+      width: 100vw;
+      z-index: 1001;
+    }
+  }
+}
+
+// Page Content Styles - Enhanced with proper theme variables
+.content-wrapper {
+  // Ensure background and text colors use theme variables
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+
+  // Base page styles
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-primary) !important;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: var(--text-secondary) !important;
+    line-height: 1.6;
+  }
+
+  // Card styles
+  .card,
+  .dispatch-card {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: $spacing-md;
+    box-shadow: var(--shadow);
+    margin-bottom: $spacing-md;
+    color: var(--text-primary) !important;
+  }
+
+  // Button styles
+  .btn,
+  .btn-primary {
+    background-color: $color-simorange;
+    color: $color-white;
+    border: none;
+    padding: $spacing-xs $spacing-md;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: $font-medium;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: color.adjust($color-simorange, $lightness: -10%);
+      transform: translateY(-2px);
+    }
+  }
+
+  // Form styles
+  input,
+  select,
+  textarea {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary) !important;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border-color: $color-simorange;
+      box-shadow: 0 0 0 2px rgba($color-simorange, 0.2);
+    }
+
+    &::placeholder {
+      color: var(--text-secondary) !important;
+    }
+  }
+
+  label {
+    color: var(--text-primary) !important;
+    font-weight: $font-medium;
+    margin-bottom: $spacing-xs;
+    display: block;
+  }
+
+  // Status badges
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: $font-small;
+    font-weight: $font-medium;
+
+    &.status-delivered {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    &.status-in-transit {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    &.status-pending {
+      background-color: rgba(251, 191, 36, 0.1);
+      color: #fbbf24;
+    }
+
+    &.status-cancelled {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+  }
+
+  // Table styles (if you have any)
+  table {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+
+    th,
+    td {
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+
+    th {
+      background-color: var(--bg-secondary);
+    }
+  }
+
+  // Any other content elements
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease,
+      border-color 0.3s ease;
+  }
+}
+
+// Global smooth scrolling
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
+
+  &:hover {
+    background-color: $color-simorange;
+  }
+}

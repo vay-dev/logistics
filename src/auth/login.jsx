@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./styles/login.scss";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const url = "https://electronic-gertrudis-chanel-debb-bad97784.koyeb.app";
+  const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,7 +41,9 @@ const Login = () => {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to create account");
       }
-
+      const data = await response.json();
+      localStorage.setItem("token", data.access_token);
+      navigate("/user/");
       toast.success("Login successfully!");
     } catch (error) {
       setError(error.message || "An error occurred Logging in");
