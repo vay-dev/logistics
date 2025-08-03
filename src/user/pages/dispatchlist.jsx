@@ -80,7 +80,6 @@ const Dispatches = () => {
 
       const data = await response.json();
       setDispatches(data);
-      console.log(data);
       toast.success("Fetched Dispatches");
     } catch (error) {
       toast.error(
