@@ -812,6 +812,20 @@ body.dark-mode {
         }
       }
     }
+
+    #button {
+      width: 100%;
+      height: 100%;
+      padding: 8px 10px;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      margin-block: 15px;
+      background: var(--dispatch-accent-dark);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+    }
   }
 }
 
