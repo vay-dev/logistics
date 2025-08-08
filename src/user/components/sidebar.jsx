@@ -70,7 +70,7 @@ const UserSidebar = ({ onToggle }) => {
           {...(isCollapsed ? { role: "button" } : {})}
         >
           <i className="fas fa-shipping-fast"></i>
-          {!isCollapsed && <span>DispatchHub</span>}
+          {!isCollapsed && <span>ShipUp</span>}
         </div>
         <button
           className="toggle-btn"

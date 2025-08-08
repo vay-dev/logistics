@@ -68,6 +68,7 @@ const AddDispatch = () => {
 
   const handleSubmit = async () => {
     setIsLoading(true);
+    const token = localStorage.getItem("token");
 
     const submitData = {
       recipient_id: formData.recipient_id,
@@ -83,11 +84,15 @@ const AddDispatch = () => {
       },
     };
 
+    console.log(token);
+    console.log("data to submit", submitData);
+
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(submitData),
       });
