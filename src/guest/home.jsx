@@ -21,13 +21,6 @@ const Home = () => {
     }
   };
 
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    document.body.classList.toggle("dark-mode", newMode);
-    localStorage.setItem("darkMode", newMode);
-  };
-
   useEffect(() => {
     confirmToken();
   }, []);
@@ -104,11 +97,6 @@ const Home = () => {
   ];
   return (
     <>
-      <div className="theme-toggle">
-        <button className="theme-btn" onClick={() => toggleDarkMode()}>
-          <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
-        </button>
-      </div>
       <div className="content-wrapper">
         <div className="hero-section container-fluid mt-4">
           <div className="row">

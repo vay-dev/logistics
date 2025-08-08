@@ -80,12 +80,6 @@ const Services = () => {
 
   return (
     <>
-      <div className="theme-toggle">
-        <button className="theme-btn" onClick={() => toggleDarkMode()}>
-          <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
-        </button>
-      </div>
-
       <div className="services-page">
         {/* Hero Section */}
         <div className="services-hero">
