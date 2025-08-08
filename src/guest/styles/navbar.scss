@@ -2,6 +2,51 @@
 @use "../../variables" as *;
 @use "../../functions" as *;
 
+// Root CSS Variables for Theme Support
+:root {
+  // Light Mode (Default)
+  --navbar-bg: #{$color-light-bg};
+  --navbar-text: #{$color-text1};
+  --navbar-text-secondary: #{$color-text2};
+  --navbar-shadow: rgba(0, 0, 0, 0.3);
+  --mobile-menu-bg: #{$color-light-bg};
+  --mobile-nav-text: #{$color-simdarkblue};
+  --mobile-nav-border: rgba(
+    #{red($color-text2)},
+    #{green($color-text2)},
+    #{blue($color-text2)},
+    0.1
+  );
+  --theme-btn-bg: #{$color-light-bg};
+  --theme-btn-text: #{$color-text2};
+  --theme-btn-shadow: rgba(0, 0, 0, 0.1);
+  --theme-btn-shadow-hover: rgba(0, 0, 0, 0.2);
+  --hamburger-color: #{$color-text2};
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+}
+
+// Dark Mode Variables
+body.dark-mode {
+  --navbar-bg: #{$color-dark-bg};
+  --navbar-text: #{$color-dark-text};
+  --navbar-text-secondary: #{$color-text3};
+  --navbar-shadow: rgba(0, 0, 0, 0.5);
+  --mobile-menu-bg: #{$color-dark-bg};
+  --mobile-nav-text: #{$color-dark-text};
+  --mobile-nav-border: rgba(
+    #{red($color-text3)},
+    #{green($color-text3)},
+    #{blue($color-text3)},
+    0.1
+  );
+  --theme-btn-bg: rgba(255, 255, 255, 0.1);
+  --theme-btn-text: #{$color-dark-text};
+  --theme-btn-shadow: rgba(0, 0, 0, 0.3);
+  --theme-btn-shadow-hover: rgba(0, 0, 0, 0.4);
+  --hamburger-color: #{$color-dark-text};
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
 header {
   display: flex;
   align-items: flex-end;
@@ -13,16 +58,18 @@ header {
   top: 0;
   left: 0;
   z-index: 10000;
-  background-color: $color-light-bg;
-  color: contrast-color($color-light-bg);
-  box-shadow: -4px 0 15px rgba($color: #000000, $alpha: 0.3);
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  box-shadow: -4px 0 15px var(--navbar-shadow);
+  transition: all 0.3s ease;
 
   h1 {
     font-size: $font-big;
     margin-bottom: 1rem;
-    color: $color-text2;
+    color: var(--navbar-text);
     font-weight: $font-semibold;
     z-index: 10001;
+    transition: color 0.3s ease;
 
     span {
       color: $color-simorange;
@@ -117,7 +164,7 @@ header {
       display: block;
       height: 3px;
       width: 100%;
-      background-color: $color-text2;
+      background-color: var(--hamburger-color);
       transition: all 0.3s ease;
       transform-origin: center;
     }
@@ -145,7 +192,8 @@ header {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    background-color: var(--overlay-bg);
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
@@ -164,7 +212,7 @@ header {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background-color: $color-light-bg;
+    background-color: var(--mobile-menu-bg);
     z-index: 10000;
     padding: 100px 20px 20px;
     transition: right 0.3s ease;
