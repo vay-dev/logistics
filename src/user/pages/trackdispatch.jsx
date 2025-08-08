@@ -38,6 +38,7 @@ const TrackDispatch = () => {
       toast.error(error.message);
     } finally {
       setIsLoading(false);
+      setFormData("");
     }
   };
 

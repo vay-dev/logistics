@@ -23,7 +23,7 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -35,33 +35,28 @@ const Contact = () => {
       message: formData.message,
     };
 
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         "service_6tprcqf",
         "template_br9mx9m",
         templateParams,
         "z_rz1HBDj-dGUXvCL"
-      )
-      .then(
-        (response) => {
-          toast.success(
-            "Message sent successfully! We'll get back to you soon."
-          );
-
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            subject: "",
-            message: "",
-          });
-          setIsSubmitting(false);
-        },
-        (error) => {
-          toast.error("Something went wrong. Please try again.");
-          setIsSubmitting(false);
-        }
       );
+
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
