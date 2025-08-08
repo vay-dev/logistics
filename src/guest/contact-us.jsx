@@ -6,9 +6,6 @@ import { toast } from "react-toastify";
 import ContactMap from "./contact-map.jsx";
 
 const Contact = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,17 +14,6 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    document.body.classList.toggle("dark-mode", newMode);
-    localStorage.setItem("darkMode", newMode);
-  };
-
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-  }, [darkMode]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -151,12 +137,6 @@ const Contact = () => {
 
   return (
     <>
-      <div className="theme-toggle">
-        <button className="theme-btn" onClick={() => toggleDarkMode()}>
-          <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
-        </button>
-      </div>
-
       <div className="contact-page">
         {/* Hero Section */}
         <div className="contact-hero">
